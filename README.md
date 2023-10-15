@@ -48,12 +48,6 @@ pip install -r requirements.txt
 python bot.py
 ```
 
-Создайте файл `.env` со следующими переменными:
-* DWMN_TOKEN=[Devman](https://dvmn.org/api/docs/) API token
-* TOKEN_TELEGRAM=telegram bot token
-* CHAT_ID_TG=ваш telegram chat id
-
-
 ## Результат выполнения
 
 После проверки вашей работы, Вам придет уведомление:
