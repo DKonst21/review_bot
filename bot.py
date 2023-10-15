@@ -5,6 +5,7 @@ import textwrap
 import logging
 
 from dotenv import load_dotenv
+from time import sleep
 
 logger = logging.getLogger('review_bot')
 
@@ -78,8 +79,12 @@ def main():
 
         except requests.exceptions.ReadTimeout:
             logger.info('Истекло время ожидания, повторный запрос...')
-        continue
+            continue
 
+        except requests.ConnectionError:
+            logger.info('Ошибка соединения, повторная попытка через 60 секунд.')
+            sleep(60)
+            continue
 
 if __name__ == '__main__':
     main()
