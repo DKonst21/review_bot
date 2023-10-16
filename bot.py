@@ -7,24 +7,6 @@ import logging
 from dotenv import load_dotenv
 from time import sleep
 
-logger = logging.getLogger('review_bot')
-
-
-class TelegramLogsHandler(logging.Handler):
-
-    def __init__(self, tg_bot, tg_chat_id):
-        super().__init__()
-
-        logging_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s -  %(message)s - %(exc_info)s')
-        self.setFormatter(fmt=logging_format)
-
-        self.tg_bot = tg_bot
-        self.tg_chat_id = tg_chat_id
-
-    def emit(self, record):
-        log_entry = self.format(record)
-        self.tg_bot.send_message(chat_id=self.tg_chat_id, text=log_entry)
-
 
 def send_telegram_notification(lesson_title, is_negative, lesson_url, chat_id, bot):
     if not is_negative:
@@ -44,13 +26,6 @@ def main():
     chat_id = os.getenv('CHAT_ID_TG')
     telegram_token = os.getenv('TOKEN_TELEGRAM')
     dewman_token = os.getenv('DWMN_TOKEN')
-
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s -  %(message)s - %(exc_info)s',
-        datefmt='%m/%d/%Y %I:%M:%S %p'
-    )
-    logger.addHandler(TelegramLogsHandler(tg_bot=telegram_token, tg_chat_id=chat_id))
 
     last_timestamp = None
 
@@ -78,11 +53,11 @@ def main():
                     send_telegram_notification(lesson_title, is_negative, lesson_url, chat_id, bot)
 
         except requests.exceptions.ReadTimeout:
-            logger.info('Истекло время ожидания, повторный запрос...')
+            bot.send_message(chat_id=chat_id, text='Истекло время ожидания, повторный запрос...')
             continue
 
         except requests.ConnectionError:
-            logger.info('Ошибка соединения, повторная попытка через 60 секунд.')
+            bot.send_message(chat_id=chat_id, text='Ошибка соединения, повторная попытка через 60 секунд.')
             sleep(60)
             continue
 
