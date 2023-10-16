@@ -29,7 +29,6 @@ def main():
     last_timestamp = None
 
     bot = telegram.Bot(token=telegram_token)
-    logging.info('Бот запущен.')
 
     while True:
         try:
