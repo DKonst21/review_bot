@@ -2,7 +2,6 @@ import os
 import requests
 import telegram
 import textwrap
-import logging
 
 from dotenv import load_dotenv
 from time import sleep
