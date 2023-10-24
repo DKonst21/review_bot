@@ -22,19 +22,21 @@ def send_telegram_notification(lesson_title, is_negative, lesson_url, chat_id, b
 
 def main():
     load_dotenv()
-    chat_id = os.getenv('CHAT_ID_TG')
+    # chat_id = os.getenv('CHAT_ID_TG')
+    chat_id = '799962439'
     telegram_token = os.getenv('TOKEN_TELEGRAM')
     dewman_token = os.getenv('DWMN_TOKEN')
 
     last_timestamp = None
 
-    # bot = telegram.bot.Bot(token=telegram_token)
-    bot = '6517566984:AAG-8xJpGz7Z1k1Ka-uWH2vABWwPXoZY_tQ'
+    # bot = telegram.Bot(token=telegram_token)
+    bot = telegram.Bot(token='6517566984:AAG-8xJpGz7Z1k1Ka-uWH2vABWwPXoZY_tQ')
 
     while True:
         try:
             url = 'https://dvmn.org/api/long_polling/'
-            headers = {"Authorization": dewman_token}
+            # headers = {"Authorization": dewman_token}
+            headers = {"Authorization": 'afedbb153f6ccb0af553482685e2c18c449190d4'}
             params = {'timestamp': last_timestamp}
             response = requests.get(url, headers=headers, params=params)
             response.raise_for_status()
