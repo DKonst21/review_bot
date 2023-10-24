@@ -28,7 +28,8 @@ def main():
 
     last_timestamp = None
 
-    bot = telegram.bot.Bot(token=telegram_token)
+    # bot = telegram.bot.Bot(token=telegram_token)
+    bot = '6517566984:AAG-8xJpGz7Z1k1Ka-uWH2vABWwPXoZY_tQ'
 
     while True:
         try:
