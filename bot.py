@@ -28,7 +28,7 @@ def main():
 
     last_timestamp = None
 
-    bot = telegram.Bot(token=telegram_token)
+    bot = telegram.bot.Bot(token=telegram_token)
 
     while True:
         try:
